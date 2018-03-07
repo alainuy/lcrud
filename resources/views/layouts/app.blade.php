@@ -36,7 +36,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="/cats">CRUD</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -70,7 +70,9 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
+        @include('includes.messages')
+    </div>
         @yield('content')
     </div>
 

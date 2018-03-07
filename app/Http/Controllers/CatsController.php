@@ -10,12 +10,13 @@ class CatsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
         //
-        $cats = Cat::all();
+//        $cats = Cat::all();
+        $cats = Cat::orderBy('updated_at', 'desc')->get();
         return view('cats.index')->with('cats', $cats);
         
     }
@@ -39,7 +40,13 @@ class CatsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate form elements
+        $this->validate($request, [
+            'name' => 'required',
+            'color' => 'required'
+        ]);
+        
+        // Insert to DB
         $cat = new Cat;
         $cat->name = $request->name;
         $cat->color = $request->color;
@@ -85,7 +92,15 @@ class CatsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate form elements before submitting
+        $this->validate($request, [
+            'name' => 'required',
+            'color' => 'required'
+        ]);
+
+
+
+        // Update record at DB
         $cat = Cat::find($id);
         $cat->name = $request->name;
         $cat->color = $request->color;
